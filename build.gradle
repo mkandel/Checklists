@@ -36,15 +36,21 @@ dependencies {
 	// Stuff I added
 	implementation 'org.springframework.boot:spring-boot-actuator'
 	implementation 'org.springframework.boot:spring-boot-actuator-autoconfigure'
+	compile group: 'org.apache.commons', name: 'commons-text', version: '1.4'
 //	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
 //	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
 
 	// Testing
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+//	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+//		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+//	}
 //	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	// Mine
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile group: 'org.springframework', name: 'spring-test', version: '5.2.2.RELEASE'
+//	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.2.0'
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '3.2.4'
 }
 
 test {
