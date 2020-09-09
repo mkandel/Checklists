@@ -27,7 +27,7 @@ public class UserBuilder implements Builder<User> {
         user.setId(id);
         user.setUsername(username);
         user.setEmail(email);
-        user.setDisplayName(displayName);
+        user.setDisplayname(displayName);
         user.setActive(active);
 
         return user;
