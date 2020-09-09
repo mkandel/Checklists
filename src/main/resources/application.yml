@@ -3,8 +3,8 @@
 #
 
 # App specific config:
-checklists:
-  apiver: /v1
+#checklists:
+#  apiver: /v1
 
 server:
   port: 8088
@@ -41,5 +41,5 @@ spring:
 logging:
   level:
     org.springframework.web: INFO
-    com.mkandel.checklists: DEBUG
+    com.mkandel.checklists: TRACE
     org.hibernate: INFO

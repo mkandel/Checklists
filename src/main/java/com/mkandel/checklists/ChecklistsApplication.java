@@ -1,7 +1,6 @@
 package com.mkandel.checklists;
 
 import com.mkandel.checklists.utils.LogUtil;
-import com.mkandel.checklists.utils.Routes;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -13,59 +12,49 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 public class ChecklistsApplication {
+    static
+    LogUtil logger;
 
-	final
-	Routes routes;
+    @Autowired
+    public ChecklistsApplication(DataSource dataSource,
+                                 LogUtil logUtil) {
 
-	static
-	LogUtil logger;
+        logger = logUtil;
+        runFlyway(dataSource);
+    }
 
-	@Autowired
-	public ChecklistsApplication(DataSource dataSource,
-								 Routes routes,
-								 LogUtil logUtil) {
+    public static void main(String[] args) {
+        SpringApplication.run(ChecklistsApplication.class, args);
+    }
 
-		logger = logUtil;
-		this.routes = routes;
-		this.routes.Init();
-		runFlyway(dataSource);
-	}
+    @Bean
+    public FlywayMigrationStrategy migrationStrategy() {
+        return Flyway::validate;
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(ChecklistsApplication.class, args);
-	}
-
-	@Bean
-	public FlywayMigrationStrategy migrationStrategy() {
-		return Flyway::validate;
-	}
-
-	private void runFlyway(DataSource datasource) {
-		// Playing with reading properties from application.yml
-		//  TODO: Clean this up eventually
-		logger.debug("ChecklistsApplication: routes.BASE: " + routes.BASE);
-
-		Flyway
-				.configure()
-				.dataSource(datasource)
-				//  This is actually kinda silly and took me quite a while to get right.
-				.table("flyway_migration_history")
-				//  Ideally, I wanted `flyway_migration_history` to reside in `flyway_history_schema`
-				//    but the "real" tables I wanted in `checklists`, I tried all kinds of combinations here:
-				.schemas("checklists", "flyway_history_schema")
-				//  If I change the order of schemas here, it breaks ...
-				.defaultSchema("flyway_history_schema")
-				//  If I do the logical thing and use `checklists` as the default schema, it breaks ...
-				//  But everything works fine like this and ...
-				.initSql("CREATE SCHEMA IF NOT EXISTS flyway_history_schema;")
-				//  Even though the empty `checklists` schema has to already exist, creating
-				//    `flyway_history_schema` here works fine which is great!
-				.locations("classpath:db/migration")
-				.baselineOnMigrate(true)
-				.validateOnMigrate(true)
-				.repeatableSqlMigrationPrefix("R")
-				.sqlMigrationPrefix("V")
-				.load()
-				.migrate();
-	}
+    private void runFlyway(DataSource datasource) {
+        Flyway
+                .configure()
+                .dataSource(datasource)
+                //  This is actually kinda silly and took me quite a while to get right.
+                .table("flyway_migration_history")
+                //  Ideally, I wanted `flyway_migration_history` to reside in `flyway_history_schema`
+                //    but the "real" tables I wanted in `checklists`, I tried all kinds of combinations here:
+                .schemas("checklists", "flyway_history_schema")
+                //  If I change the order of schemas here, it breaks ...
+                .defaultSchema("flyway_history_schema")
+                //  If I do the logical thing and use `checklists` as the default schema, it breaks ...
+                //  But everything works fine like this and ...
+                .initSql("CREATE SCHEMA IF NOT EXISTS flyway_history_schema;")
+                //  Even though the empty `checklists` schema has to already exist, creating
+                //    `flyway_history_schema` here works fine which is great!
+                .locations("classpath:db/migration")
+                .baselineOnMigrate(true)
+                .validateOnMigrate(true)
+                .repeatableSqlMigrationPrefix("R")
+                .sqlMigrationPrefix("V")
+                .load()
+                .migrate();
+        logger.trace("runFlyway complete.");
+    }
 }

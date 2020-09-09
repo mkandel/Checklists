@@ -1,68 +1,27 @@
 package com.mkandel.checklists.utils;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
-@Component
-@ConfigurationProperties("checklists")
 public class Routes {
-    public final String ROOT = "/api";
-    public String BASE;
 
-    final
-    LogUtil logger;
-    private String APIVER; // Read from application.yml
+    public final static String ROOT = "/api";
+    public final static String BASE = ROOT + "/v1";
     // Housekeeping
-    public String HEALTH;
-    public String VALIDATE_EMAIL;
+    public static final String HEALTH = BASE + "/health";
+    public static final String VALIDATE_EMAIL = BASE + "/validateEmail/{email}";
     // User Controller
-    public String USERS;
-    public String USER;
-    public String USER_BY_USERNAME;
-
-    // Testing
-    public String USERNAMES;
-    public String USER_TYPES;
-    public String ADD_USER;
+    public static final String USERS = BASE + "/users";
+    public static final String USER = BASE + "/user/{id}";
+    public static final String USER_BY_USERNAME = BASE + "/userByUsername/{username}";
+    // Testing.  TODO: Remove these eventually
+    public static final String USERNAMES = BASE + "/usernames";
+    public static final String USER_TYPES = USERS + "/types";
+    public static final String ADD_USER = USER_BY_USERNAME + "/{username}/{email}/{displayname}/{active}";
     // Dummy route to play around with
-    public String TEAPOT;
-    private boolean initHasRun = false;
+    public static final String TEAPOT = BASE + "/teapot";
+    private static LogUtil logger;
+    private static boolean initHasRun = false;
 
     public Routes(LogUtil logger) {
-        this.logger = logger;
-        this.logger.trace("Routes: Constructor complete.");
-    }
-
-    // apiver initializes really late, after the constructor anyway ...  I hate needing the Init() method but it works ...
-    public void Init() {
-        if (initHasRun) return;
-
-        BASE = ROOT + APIVER;
-
-        HEALTH = BASE + "/health";
-        VALIDATE_EMAIL = BASE + "/validateEmail/{email}";
-
-        USERS = BASE + "/users";
-        USER = BASE + "/user/{id}";
-        USER_BY_USERNAME = BASE + "/userByUsername/{username}";
-
-        // Testing
-        USERNAMES = BASE + "/usernames";
-        USER_TYPES = USERS + "/types";
-        ADD_USER = BASE + "/userByUsername/{username}/{fName}/{lName}/{email}/{type}";
-
-        // Dummy route to play around with
-        TEAPOT = BASE + "/teapot";
-        initHasRun = true;
-
-        logger.trace("Routes.Init() has been run");
-    }
-
-    public String getAPIVER() {
-        return APIVER;
-    }
-
-    public void setAPIVER(String APIVER) {
-        this.APIVER = APIVER;
+        Routes.logger = logger;
+        Routes.logger.trace("Routes: Constructor complete.");
     }
 }
