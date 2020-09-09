@@ -38,4 +38,3 @@ spring:
     ignore-future-migrations: false
     ignore-missing-migrations: false
     baseline-on-migrate: true
-    table: FlywayMigrationHistory

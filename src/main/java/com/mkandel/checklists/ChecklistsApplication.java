@@ -36,14 +36,25 @@ public class ChecklistsApplication {
 
 	private void runFlyway(DataSource datasource) {
 		// Playing with reading properties from application.yml
+		//  TODO: Clean this up eventually
 		Logger logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
 		logger.info("*** routes.BASE: " + routes.BASE + " ***");
 
-		// Run Flyway migration/validation
 		Flyway
 				.configure()
 				.dataSource(datasource)
+				//  This is actually kinda silly and took me quite a while to get right.
 				.table("flyway_migration_history")
+				//  Ideally, I wanted `flyway_migration_history` to reside in `flyway_history_schema`
+				//    but the "real" tables I wanted in `checklists`, I tried all kinds of combinations here:
+				.schemas("checklists", "flyway_history_schema")
+				//  If I change the order of schemas here, it breaks ...
+				.defaultSchema("flyway_history_schema")
+				//  If I do the logical thing and use `checklists` as the default schema, it breaks ...
+				//  But everything works fine like this and ...
+				.initSql("CREATE SCHEMA IF NOT EXISTS flyway_history_schema;")
+				//  Even though the empty `checklists` schema has to already exist, creating
+				//    `flyway_history_schema` here works fine which is great!
 				.locations("classpath:db/migration")
 				.baselineOnMigrate(true)
 				.validateOnMigrate(true)
