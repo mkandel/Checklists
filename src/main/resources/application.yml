@@ -1,0 +1,41 @@
+#
+# Copyright (c) 2020. Marc Kandel
+#
+
+# App specific config:
+checklists:
+  apiver: /v1
+
+server:
+  port: 8088
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  profiles:
+    active: dev
+  datasource:
+    url: "jdbc:mysql://127.0.0.1:3306/checklists?autoReconnect=true&useSSL=false&cachePrepStmts=true&prepStmtCacheSize=250&prepStmtCacheSqlLimit=2048&useServerPrepStmts=true&serverTimezone=UTC"
+    username: "sa"
+    password: "sa"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    platform: mysql
+  jpa:
+    show-sql: false
+    properties:
+      generate_statistics: false
+      hibernate:
+        SQL: debug
+  jackson:
+    serialization:
+      indent_output: true
+  flyway:
+    enabled: false
+    check-location: false
+    locations: classpath:db/migration
+    sqlMigrationPrefix: V
+    repeatableSqlMigrationPrefix: R
+    ignore-future-migrations: false
+    ignore-missing-migrations: false
+    baseline-on-migrate: true
+    table: FlywayMigrationHistory

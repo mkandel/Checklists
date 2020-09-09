@@ -1,0 +1,52 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.3.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'com.mkandel'
+version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = '13'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// From the zip file, minus some commented out things
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.flywaydb:flyway-core'
+//	implementation 'org.springframework.session:spring-session-core'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Stuff I added
+	implementation 'org.springframework.boot:spring-boot-actuator'
+	implementation 'org.springframework.boot:spring-boot-actuator-autoconfigure'
+//	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
+//	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+
+	// Testing
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+//	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+	useJUnitPlatform()
+}
