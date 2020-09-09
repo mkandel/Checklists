@@ -38,3 +38,8 @@ spring:
     ignore-future-migrations: false
     ignore-missing-migrations: false
     baseline-on-migrate: true
+logging:
+  level:
+    org.springframework.web: INFO
+    com.mkandel.checklists: DEBUG
+    org.hibernate: INFO

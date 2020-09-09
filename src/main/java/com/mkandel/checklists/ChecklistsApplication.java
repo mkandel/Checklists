@@ -1,5 +1,6 @@
 package com.mkandel.checklists;
 
+import com.mkandel.checklists.utils.LogUtil;
 import com.mkandel.checklists.utils.Routes;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
@@ -18,8 +19,15 @@ public class ChecklistsApplication {
 	final
 	Routes routes;
 
+	static
+	LogUtil logger;
+
 	@Autowired
-	public ChecklistsApplication(DataSource dataSource, Routes routes) {
+	public ChecklistsApplication(DataSource dataSource,
+								 Routes routes,
+								 LogUtil logUtil) {
+
+		logger = logUtil;
 		this.routes = routes;
 		this.routes.Init();
 		runFlyway(dataSource);
@@ -37,8 +45,7 @@ public class ChecklistsApplication {
 	private void runFlyway(DataSource datasource) {
 		// Playing with reading properties from application.yml
 		//  TODO: Clean this up eventually
-		Logger logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
-		logger.info("*** routes.BASE: " + routes.BASE + " ***");
+		logger.debug("ChecklistsApplication: routes.BASE: " + routes.BASE);
 
 		Flyway
 				.configure()

@@ -24,6 +24,22 @@ public class Routes {
     private String apiver;
     private boolean initHasRun = false;
 
+    final
+    LogUtil logger;
+
+    public String getApiver() {
+        return apiver;
+    }
+
+    public void setApiver(String apiver) {
+        this.apiver = apiver;
+    }
+
+    public Routes(LogUtil logger) {
+        this.logger = logger;
+        this.logger.trace("Routes: Constructor complete.");
+    }
+
     // apiver initializes really late, after the constructor anyway ...  I hate needing the Init() method but it works ...
     public void Init() {
         if (initHasRun) return;
@@ -45,13 +61,7 @@ public class Routes {
         // Dummy route to play around with
         TEAPOT = BASE + "/teapot";
         initHasRun = true;
-    }
 
-    public String getApiver() {
-        return apiver;
-    }
-
-    public void setApiver(String apiver) {
-        this.apiver = apiver;
+        logger.trace("Routes.Init() has been run");
     }
 }
