@@ -24,6 +24,7 @@ create table checklist_templates
 (
     id      int not null auto_increment primary key,
     creator int not null,
+    name    VARCHAR(50) not null,
     foreign key (creator) references users (id) ON DELETE CASCADE
 );
 create table item_templates
