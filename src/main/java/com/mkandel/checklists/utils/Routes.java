@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 public class Routes {
     public final String ROOT = "/api";
     public String BASE;
+
+    final
+    LogUtil logger;
+    private String APIVER; // Read from application.yml
     // Housekeeping
     public String HEALTH;
     public String VALIDATE_EMAIL;
@@ -15,25 +19,14 @@ public class Routes {
     public String USERS;
     public String USER;
     public String USER_BY_USERNAME;
+
     // Testing
     public String USERNAMES;
     public String USER_TYPES;
     public String ADD_USER;
     // Dummy route to play around with
     public String TEAPOT;
-    private String apiver;
     private boolean initHasRun = false;
-
-    final
-    LogUtil logger;
-
-    public String getApiver() {
-        return apiver;
-    }
-
-    public void setApiver(String apiver) {
-        this.apiver = apiver;
-    }
 
     public Routes(LogUtil logger) {
         this.logger = logger;
@@ -44,7 +37,7 @@ public class Routes {
     public void Init() {
         if (initHasRun) return;
 
-        BASE = ROOT + apiver;
+        BASE = ROOT + APIVER;
 
         HEALTH = BASE + "/health";
         VALIDATE_EMAIL = BASE + "/validateEmail/{email}";
@@ -63,5 +56,13 @@ public class Routes {
         initHasRun = true;
 
         logger.trace("Routes.Init() has been run");
+    }
+
+    public String getAPIVER() {
+        return APIVER;
+    }
+
+    public void setAPIVER(String APIVER) {
+        this.APIVER = APIVER;
     }
 }
