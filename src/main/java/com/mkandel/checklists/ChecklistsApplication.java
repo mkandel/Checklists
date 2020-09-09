@@ -37,7 +37,7 @@ public class ChecklistsApplication {
 	private void runFlyway(DataSource datasource) {
 		// Playing with reading properties from application.yml
 		Logger logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
-		logger.debug("*** routes.BASE: " + routes.BASE + " ***");
+		logger.info("*** routes.BASE: " + routes.BASE + " ***");
 
 		// Run Flyway migration/validation
 		Flyway
@@ -51,6 +51,5 @@ public class ChecklistsApplication {
 				.sqlMigrationPrefix("V")
 				.load()
 				.migrate();
-//		flyway.migrate();
 	}
 }
