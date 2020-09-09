@@ -1,15 +1,16 @@
 package com.mkandel.checklists.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
     private String username;
     private String email;
-    private String displayName;
+    private String displayname;
     private boolean active;
 //    private List<Role> roles;
 //    private List<Usergroup> usergroups;
@@ -40,12 +41,12 @@ public class User {
         this.email = email;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getDisplayname() {
+        return displayname;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setDisplayname(String displayName) {
+        this.displayname = displayName;
     }
 
     public boolean isActive() {
