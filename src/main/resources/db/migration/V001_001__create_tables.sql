@@ -14,11 +14,11 @@ create table roles
 create table user_roles
 (
     id   int not null auto_increment primary key,
-    user int not null,
-    role int not null,
-    foreign key (user) references users (id) ON DELETE CASCADE,
-    foreign key (role) references roles (id) ON DELETE CASCADE,
-    unique (user, role)
+    user_id int not null,
+    role_id int not null,
+    foreign key (user_id) references users (id) ON DELETE CASCADE,
+    foreign key (role_id) references roles (id) ON DELETE CASCADE,
+    unique (user_id, role_id)
 );
 create table checklist_templates
 (

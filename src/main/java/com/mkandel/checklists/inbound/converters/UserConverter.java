@@ -4,11 +4,14 @@
 
 package com.mkandel.checklists.inbound.converters;
 
+import com.mkandel.checklists.entities.Role;
 import com.mkandel.checklists.entities.User;
 import com.mkandel.checklists.inbound.dtos.UserDto;
+import org.modelmapper.AbstractConverter;
 import org.modelmapper.ModelMapper;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -19,7 +22,7 @@ public class UserConverter {
         return modelMapper.map(dto, User.class);
     }
 
-    public static List<User> toUser(List<UserDto> dtos) {
+    public static Collection<User> toUser(Collection<UserDto> dtos) {
         return dtos.stream()
                 .map(UserConverter::toUser)
                 .collect(toList());
@@ -29,9 +32,21 @@ public class UserConverter {
         return modelMapper.map(user, UserDto.class);
     }
 
-    public static List<UserDto> toUserDto(List<User> users) {
+    public static Collection<UserDto> toUserDto(Collection<User> users) {
         return users.stream()
                 .map(user -> modelMapper.map(user, UserDto.class))
                 .collect(toList());
+    }
+
+    public class RolesListConverter extends AbstractConverter<Collection<Role>, Collection<String>> {
+
+        @Override
+        protected Collection<String> convert(Collection<Role> roles) {
+
+            return roles
+                    .stream()
+                    .map(Role::getName)
+                    .collect(Collectors.toList());
+        }
     }
 }

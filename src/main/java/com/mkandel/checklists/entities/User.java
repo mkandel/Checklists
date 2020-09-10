@@ -1,17 +1,27 @@
 package com.mkandel.checklists.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+//    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
     private String username;
     private String email;
     private String displayname;
     private boolean active;
+    //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "user_roles")
+//    @JoinColumn(name = "user")
+    private Collection<Role> roles;
 //    private List<Role> roles;
 //    private List<Usergroup> usergroups;
 //    private List<Checklist> assignedChecklists;
@@ -55,5 +65,16 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public User() {
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -6,6 +6,8 @@ package com.mkandel.checklists.inbound.dtos;
 
 import org.springframework.http.MediaType;
 
+import java.util.List;
+
 public class UserDto {
     public static final String JSON_MIME_TYPE = "application/json;type=checklists-user;version=1.0.0";
     public static final MediaType JSON_MEDIA_TYPE = MediaType.parseMediaType(JSON_MIME_TYPE);
@@ -14,6 +16,7 @@ public class UserDto {
     private String email;
     private String displayname;
     private boolean active;
+    private List<UserRoleDto> userRoleDtos;
 
     public UserDto() {
     }
@@ -58,5 +61,11 @@ public class UserDto {
         this.displayname = displayname;
     }
 
+    public List<UserRoleDto> getUserRoleDtos() {
+        return userRoleDtos;
+    }
 
+    public void setRoles(List<UserRoleDto> roleDtos) {
+        this.userRoleDtos = roleDtos;
+    }
 }
