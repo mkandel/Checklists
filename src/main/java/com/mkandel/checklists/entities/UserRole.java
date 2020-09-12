@@ -17,9 +17,10 @@ public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
-//    @JoinColumn(name = "user_id")
     private Collection<User> users;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
