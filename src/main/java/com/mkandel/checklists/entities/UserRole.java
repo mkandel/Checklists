@@ -15,11 +15,11 @@ public class UserRole {
     @Id
 //    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private Collection<User> users;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
     private Role role;
 
     public UserRole() {

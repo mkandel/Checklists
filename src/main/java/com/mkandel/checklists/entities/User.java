@@ -3,7 +3,9 @@ package com.mkandel.checklists.entities;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Collection;
 
@@ -18,9 +20,10 @@ public class User {
     private String displayname;
     private boolean active;
     //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
-    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "user_roles")
-//    @JoinColumn(name = "user")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 //    private List<Role> roles;
 //    private List<Usergroup> usergroups;

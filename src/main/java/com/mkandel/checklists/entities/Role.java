@@ -9,25 +9,25 @@ import javax.persistence.Table;
 public class Role {
     @Id
 //    @GeneratedValue(strategy = GenerationType.TABLE)
-    private int Id;
-    private String name;
+    private int id;
+    private String rolename;
 
     public Role() {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRolename() {
+        return rolename;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRolename(String name) {
+        this.rolename = name;
     }
 }

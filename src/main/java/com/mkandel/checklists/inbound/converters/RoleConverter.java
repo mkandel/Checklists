@@ -15,7 +15,7 @@ public class RoleConverter {
         return modelMapper.map(dto, Role.class);
     }
 
-    public static Collection<Role> toRole(Collection<RoleDto> dtos) {
+    public static Collection<Role> toRoles(Collection<RoleDto> dtos) {
         return dtos.stream()
                 .map(RoleConverter::toRole)
                 .collect(toList());
@@ -25,7 +25,7 @@ public class RoleConverter {
         return modelMapper.map(Role, RoleDto.class);
     }
 
-    public static Collection<RoleDto> toRoleDto(Collection<Role> Roles) {
+    public static Collection<RoleDto> toRoleDtos(Collection<Role> Roles) {
         return Roles.stream()
                 .map(RoleConverter::toRoleDto)
                 .collect(toList());
