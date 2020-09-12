@@ -13,7 +13,6 @@ create table roles
 );
 create table user_roles
 (
---     id   int not null auto_increment primary key,
     user_id int not null,
     role_id int not null,
     foreign key (user_id) references users (id),
@@ -67,28 +66,28 @@ create table usergroups
 );
 create table user_usergroups
 (
-    id    int not null auto_increment primary key,
     user  int not null,
     usergroup int not null,
     foreign key (user) references users (id),
     foreign key (usergroup) references usergroups (id),
-    unique (user, usergroup)
+    unique (user, usergroup),
+    primary key (user, usergroup)
 );
 create table checklist_assignees
 (
-    id        int not null auto_increment primary key,
     user      int not null,
     checklist int not null,
     foreign key (user) references users (id),
     foreign key (checklist) references checklists (id),
-    unique (user, checklist)
+    unique (user, checklist),
+    primary key (user, checklist)
 );
 create table usergroup_roles
 (
-    id    int not null auto_increment primary key,
     usergroup int not null,
     role  int not null,
     foreign key (usergroup) references usergroups (id),
     foreign key (role) references roles (id),
-    unique (usergroup, role)
+    unique (usergroup, role),
+    primary key (usergroup, role)
 );
