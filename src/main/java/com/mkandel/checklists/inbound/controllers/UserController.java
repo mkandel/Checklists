@@ -26,16 +26,12 @@ import static com.mkandel.checklists.utils.ErrorMessageConstants.USER_DOES_NOT_E
 public class UserController {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final UserRolesRepository userRolesRepository;
 
     @Autowired
     public UserController(UserRepository userRepository,
                           RoleRepository roleRepository,
                           UserRolesRepository userRolesRepository) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.userRolesRepository = userRolesRepository;
     }
 
     @GetMapping(value = Routes.USERS, produces = RoleDto.JSON_MIME_TYPE)
