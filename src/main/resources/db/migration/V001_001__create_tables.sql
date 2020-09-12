@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2020. Marc Kandel
+ */
+
+--
+-- Copyright (c) 2020. Marc Kandel
+--
+
 create table users
 (
     id          int           not null auto_increment primary key,

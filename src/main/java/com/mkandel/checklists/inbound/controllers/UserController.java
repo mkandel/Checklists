@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. Marc Kandel
+ */
+
 package com.mkandel.checklists.inbound.controllers;
 
 import com.mkandel.checklists.entities.User;

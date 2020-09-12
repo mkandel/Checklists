@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. Marc Kandel
+ */
+
 package com.mkandel.checklists.entities;
 
 import javax.persistence.Entity;

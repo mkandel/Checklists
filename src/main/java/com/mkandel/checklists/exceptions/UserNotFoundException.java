@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Marc Kandel
+ * Copyright (c) 2020. Marc Kandel
  */
 
 package com.mkandel.checklists.exceptions;

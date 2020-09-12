@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. Marc Kandel
+ */
+
 package com.mkandel.checklists.inbound.converters;
 
 import com.mkandel.checklists.entities.Role;
