@@ -2,6 +2,8 @@ package com.mkandel.checklists.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -13,10 +15,10 @@ import java.util.Collection;
 @Table(name = "user_roles")
 public class UserRole {
     @Id
-//    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+//    @JoinColumn(name = "user_id")
     private Collection<User> users;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")

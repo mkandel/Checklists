@@ -13,19 +13,20 @@ create table roles
 );
 create table user_roles
 (
-    id   int not null auto_increment primary key,
+--     id   int not null auto_increment primary key,
     user_id int not null,
     role_id int not null,
-    foreign key (user_id) references users (id) ON DELETE CASCADE,
-    foreign key (role_id) references roles (id) ON DELETE CASCADE,
-    unique (user_id, role_id)
+    foreign key (user_id) references users (id),
+    foreign key (role_id) references roles (id),
+    unique (user_id, role_id),
+    primary key (user_id, role_id)
 );
 create table checklist_templates
 (
     id      int not null auto_increment primary key,
     creator int not null,
     name    VARCHAR(50) not null,
-    foreign key (creator) references users (id) ON DELETE CASCADE
+    foreign key (creator) references users (id)
 );
 create table item_templates
 (
@@ -34,7 +35,7 @@ create table item_templates
     text               text               not null,
     position           int,
     checklist_template int                not null,
-    foreign key (checklist_template) references checklist_templates (id) ON DELETE CASCADE
+    foreign key (checklist_template) references checklist_templates (id)
 );
 create table checklists
 (
@@ -46,8 +47,8 @@ create table checklists
     update_date        datetime    not null default current_timestamp,
     complete           bit                  default 0 not null,
     completed_date     datetime,
-    foreign key (checklist_template) references checklist_templates (id) ON DELETE CASCADE,
-    foreign key (creator) references users (id) ON DELETE CASCADE
+    foreign key (checklist_template) references checklist_templates (id),
+    foreign key (creator) references users (id)
 );
 create table items
 (
@@ -56,8 +57,8 @@ create table items
     complete       bit default 0 not null,
     completed_date datetime,
     checklist      int,
-    foreign key (item_template) references item_templates (id) ON DELETE CASCADE,
-    foreign key (checklist) references checklists (id) ON DELETE CASCADE
+    foreign key (item_template) references item_templates (id),
+    foreign key (checklist) references checklists (id)
 );
 create table usergroups
 (
@@ -69,8 +70,8 @@ create table user_usergroups
     id    int not null auto_increment primary key,
     user  int not null,
     usergroup int not null,
-    foreign key (user) references users (id) ON DELETE CASCADE,
-    foreign key (usergroup) references usergroups (id) ON DELETE CASCADE,
+    foreign key (user) references users (id),
+    foreign key (usergroup) references usergroups (id),
     unique (user, usergroup)
 );
 create table checklist_assignees
@@ -78,8 +79,8 @@ create table checklist_assignees
     id        int not null auto_increment primary key,
     user      int not null,
     checklist int not null,
-    foreign key (user) references users (id) ON DELETE CASCADE,
-    foreign key (checklist) references checklists (id) ON DELETE CASCADE,
+    foreign key (user) references users (id),
+    foreign key (checklist) references checklists (id),
     unique (user, checklist)
 );
 create table usergroup_roles
@@ -87,7 +88,7 @@ create table usergroup_roles
     id    int not null auto_increment primary key,
     usergroup int not null,
     role  int not null,
-    foreign key (usergroup) references usergroups (id) ON DELETE CASCADE,
-    foreign key (role) references roles (id) ON DELETE CASCADE,
+    foreign key (usergroup) references usergroups (id),
+    foreign key (role) references roles (id),
     unique (usergroup, role)
 );

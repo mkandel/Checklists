@@ -42,4 +42,4 @@ logging:
   level:
     org.springframework.web: INFO
     com.mkandel.checklists: DEBUG
-    org.hibernate: DEBUG
+    org.hibernate: INFO

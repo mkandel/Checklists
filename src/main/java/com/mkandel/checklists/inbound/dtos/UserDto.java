@@ -4,6 +4,7 @@
 
 package com.mkandel.checklists.inbound.dtos;
 
+import com.mkandel.checklists.entities.Role;
 import org.springframework.http.MediaType;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class UserDto {
     private String email;
     private String displayname;
     private boolean active;
-    private List<UserRoleDto> userRoleDtos;
+    private List<Role> roles;
 
     public UserDto() {
     }
@@ -61,11 +62,11 @@ public class UserDto {
         this.displayname = displayname;
     }
 
-    public List<UserRoleDto> getUserRoleDtos() {
-        return userRoleDtos;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRoles(List<UserRoleDto> roleDtos) {
-        this.userRoleDtos = roleDtos;
+    public void setRoles(List<Role> roleDtos) {
+        this.roles = roleDtos;
     }
 }
