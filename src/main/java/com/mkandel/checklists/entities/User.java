@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. Marc Kandel
+ */
+
 package com.mkandel.checklists.entities;
 
 import javax.persistence.Entity;
@@ -18,6 +22,7 @@ public class User {
     private String email;
     private String displayname;
     private boolean active;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -29,6 +34,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user"),
             inverseJoinColumns = @JoinColumn(name = "usergroup"))
     private Collection<Usergroup> usergroups;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "checklist_assignees",
+            joinColumns = @JoinColumn(name = "user"),
+            inverseJoinColumns = @JoinColumn(name = "checklist"))
+    private Collection<Checklist> assignedChecklists;
 
     public int getId() {
         return id;
@@ -87,5 +98,13 @@ public class User {
 
     public void setUsergroups(Collection<Usergroup> usergroups) {
         this.usergroups = usergroups;
+    }
+
+    public Collection<Checklist> getAssignedChecklists() {
+        return assignedChecklists;
+    }
+
+    public void setAssignedChecklists(Collection<Checklist> assignedChecklists) {
+        this.assignedChecklists = assignedChecklists;
     }
 }

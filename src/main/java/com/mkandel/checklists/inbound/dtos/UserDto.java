@@ -1,9 +1,10 @@
 /*
- * Copyright (c) 2018. Marc Kandel
+ * Copyright (c) 2020. Marc Kandel
  */
 
 package com.mkandel.checklists.inbound.dtos;
 
+import com.mkandel.checklists.entities.Checklist;
 import com.mkandel.checklists.entities.Role;
 import com.mkandel.checklists.entities.Usergroup;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ public class UserDto {
     private boolean active;
     private List<Role> roles;
     private List<Usergroup> usergroups;
+    private List<Checklist> assignedChecklists;
 
     public UserDto() {
     }
@@ -78,5 +80,13 @@ public class UserDto {
 
     public void setUsergroups(List<Usergroup> usergroups) {
         this.usergroups = usergroups;
+    }
+
+    public List<Checklist> getAssignedChecklists() {
+        return assignedChecklists;
+    }
+
+    public void setAssignedChecklists(List<Checklist> assignedChecklists) {
+        this.assignedChecklists = assignedChecklists;
     }
 }
