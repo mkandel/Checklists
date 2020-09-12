@@ -9,14 +9,16 @@ git clone https://github.com/mkandel/Checklists.git
 ```
 
 ## Running the build
-To run the build via Gradle, `cd` into the repository directory and run the following command:
+~~To run the build via Gradle, `cd` into the repository directory and run the following command:~~
 ```bash
 ./gradlew
 ```
 
-By default, the `clean` and `build` tasks will be run. See the [Gradle documentation about the Java plugin
-for more details about these tasks](https://docs.gradle.org/current/userguide/java_plugin.html).
+~~By default, the `clean` and `build` tasks will be run. See the [Gradle documentation about the Java plugin
+for more details about these tasks](https://docs.gradle.org/current/userguide/java_plugin.html).~~
 
+Blah, blah, blah, I have no idea where that crap came from but whatever ...  I run it from a Spring Boot Run
+Configuration from within Intellij.  If you do different good luck.
 <!---
 ## Commonly Used Properties
 -->
