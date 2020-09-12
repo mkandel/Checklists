@@ -5,9 +5,7 @@ import com.mkandel.checklists.exceptions.UserNotFoundException;
 import com.mkandel.checklists.inbound.converters.UserConverter;
 import com.mkandel.checklists.inbound.dtos.RoleDto;
 import com.mkandel.checklists.inbound.dtos.UserDto;
-import com.mkandel.checklists.outbound.repositories.RoleRepository;
 import com.mkandel.checklists.outbound.repositories.UserRepository;
-import com.mkandel.checklists.outbound.repositories.UserRolesRepository;
 import com.mkandel.checklists.utils.Routes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +26,7 @@ public class UserController {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserRepository userRepository,
-                          RoleRepository roleRepository,
-                          UserRolesRepository userRolesRepository) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

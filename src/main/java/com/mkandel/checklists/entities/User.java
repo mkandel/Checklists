@@ -13,22 +13,16 @@ import java.util.Collection;
 @Table(name = "users")
 public class User {
     @Id
-//    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
     private String username;
     private String email;
     private String displayname;
     private boolean active;
-    //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
-//    private List<Role> roles;
-//    private List<Usergroup> usergroups;
-//    private List<Checklist> assignedChecklists;
-//    private List<Checklist> createdChecklists;
 
     public int getId() {
         return id;
