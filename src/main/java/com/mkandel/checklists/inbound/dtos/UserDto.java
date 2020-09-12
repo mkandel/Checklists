@@ -5,6 +5,7 @@
 package com.mkandel.checklists.inbound.dtos;
 
 import com.mkandel.checklists.entities.Role;
+import com.mkandel.checklists.entities.Usergroup;
 import org.springframework.http.MediaType;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class UserDto {
     private String displayname;
     private boolean active;
     private List<Role> roles;
+    private List<Usergroup> usergroups;
 
     public UserDto() {
     }
@@ -68,5 +70,13 @@ public class UserDto {
 
     public void setRoles(List<Role> roleDtos) {
         this.roles = roleDtos;
+    }
+
+    public List<Usergroup> getUsergroups() {
+        return usergroups;
+    }
+
+    public void setUsergroups(List<Usergroup> usergroups) {
+        this.usergroups = usergroups;
     }
 }

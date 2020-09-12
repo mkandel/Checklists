@@ -3,7 +3,6 @@ package com.mkandel.checklists.inbound.controllers;
 import com.mkandel.checklists.entities.User;
 import com.mkandel.checklists.exceptions.UserNotFoundException;
 import com.mkandel.checklists.inbound.converters.UserConverter;
-import com.mkandel.checklists.inbound.dtos.RoleDto;
 import com.mkandel.checklists.inbound.dtos.UserDto;
 import com.mkandel.checklists.outbound.repositories.UserRepository;
 import com.mkandel.checklists.utils.Routes;
@@ -30,19 +29,19 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping(value = Routes.USERS, produces = RoleDto.JSON_MIME_TYPE)
+    @GetMapping(value = Routes.USERS, produces = UserDto.JSON_MIME_TYPE)
     public Collection<UserDto> users() {
 
         return UserConverter.toUserDtos(new ArrayList<>(userRepository.findAll()));
     }
 
-    @GetMapping(value = Routes.USER, produces = RoleDto.JSON_MIME_TYPE)
+    @GetMapping(value = Routes.USER, produces = UserDto.JSON_MIME_TYPE)
     public UserDto userById(@PathVariable int id) throws UserNotFoundException {
         final Optional<User> optionalUser = userRepository.findById(id);
         return processOptionalUser(optionalUser, NO_SUCH_USER_ID + id);
     }
 
-    @GetMapping(value = Routes.USER_BY_USERNAME, produces = RoleDto.JSON_MIME_TYPE)
+    @GetMapping(value = Routes.USER_BY_USERNAME, produces = UserDto.JSON_MIME_TYPE)
     public UserDto userByUsername(@PathVariable String username) throws UserNotFoundException {
         final Optional<User> optionalUser = userRepository.findByUsername(username);
         return processOptionalUser(optionalUser, NO_SUCH_USERNAME + username);

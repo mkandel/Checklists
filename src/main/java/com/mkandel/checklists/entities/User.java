@@ -24,6 +24,12 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_usergroups",
+            joinColumns = @JoinColumn(name = "user"),
+            inverseJoinColumns = @JoinColumn(name = "usergroup"))
+    private Collection<Usergroup> usergroups;
+
     public int getId() {
         return id;
     }
@@ -73,5 +79,13 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public Collection<Usergroup> getUsergroups() {
+        return usergroups;
+    }
+
+    public void setUsergroups(Collection<Usergroup> usergroups) {
+        this.usergroups = usergroups;
     }
 }
