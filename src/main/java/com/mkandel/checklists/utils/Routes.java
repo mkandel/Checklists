@@ -13,6 +13,7 @@ public class Routes {
     public static final String VALIDATE_EMAIL = BASE + "/validate-email/{email}";
     // Users
     public static final String USERS = BASE + "/users";
+    public static final String USERNAMES = BASE + "/users/usernames";
     public static final String USER = BASE + "/user/{id}";
     // Roles
     public static final String ROLES = BASE + "/roles";
@@ -23,7 +24,6 @@ public class Routes {
 
     // Testing.  TODO: Remove these eventually
     public static final String USER_BY_USERNAME = BASE + "/user-by-username/{username}";
-    public static final String USERNAMES = BASE + "/usernames";
     public static final String ADD_USER = USER_BY_USERNAME + "/{username}/{email}/{displayname}/{active}";
     // Dummy route to play around with
     public static final String TEAPOT = BASE + "/teapot";

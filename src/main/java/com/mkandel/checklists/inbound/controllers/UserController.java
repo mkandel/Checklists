@@ -8,6 +8,7 @@ import com.mkandel.checklists.entities.User;
 import com.mkandel.checklists.exceptions.UserNotFoundException;
 import com.mkandel.checklists.inbound.converters.UserConverter;
 import com.mkandel.checklists.inbound.dtos.UserDto;
+import com.mkandel.checklists.inbound.dtos.UsernameDto;
 import com.mkandel.checklists.outbound.repositories.UserRepository;
 import com.mkandel.checklists.utils.Routes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,11 @@ public class UserController {
     public UserDto userByUsername(@PathVariable String username) throws UserNotFoundException {
         final Optional<User> optionalUser = userRepository.findByUsername(username);
         return processOptionalUser(optionalUser, NO_SUCH_USERNAME + username);
+    }
+
+    @GetMapping(value = Routes.USERNAMES, produces = UsernameDto.JSON_MIME_TYPE)
+    public Collection<UsernameDto> usernames() {
+        return UserConverter.toUsernameDtos(new ArrayList<>(userRepository.findAll()));
     }
 
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")

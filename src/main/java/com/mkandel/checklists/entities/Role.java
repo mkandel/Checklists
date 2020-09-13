@@ -12,7 +12,6 @@ import javax.persistence.Table;
 @Table(name = "roles")
 public class Role {
     @Id
-//    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
     private String rolename;
 
