@@ -4,6 +4,8 @@
 
 package com.mkandel.checklists.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -27,18 +29,21 @@ public class User {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonBackReference
     private Collection<Role> roles;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_usergroups",
             joinColumns = @JoinColumn(name = "user"),
             inverseJoinColumns = @JoinColumn(name = "usergroup"))
+    @JsonBackReference
     private Collection<Usergroup> usergroups;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "checklist_assignees",
             joinColumns = @JoinColumn(name = "user"),
             inverseJoinColumns = @JoinColumn(name = "checklist"))
+    @JsonBackReference
     private Collection<Checklist> assignedChecklists;
 
     public int getId() {

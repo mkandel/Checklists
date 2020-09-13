@@ -4,6 +4,8 @@
 
 package com.mkandel.checklists.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,11 +24,19 @@ public class Usergroup {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
     private String groupname;
-    //    private List<User> usergroupUsers;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_usergroups",
+            joinColumns = @JoinColumn(name = "user"),
+            inverseJoinColumns = @JoinColumn(name = "usergroup"))
+    @JsonManagedReference
+    private List<User> usergroupUsers;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "usergroup_roles",
             joinColumns = @JoinColumn(name = "usergroup"),
             inverseJoinColumns = @JoinColumn(name = "role"))
+    @JsonManagedReference
     private List<Role> usergroupRoles;
 
     public Usergroup() {
@@ -54,5 +64,13 @@ public class Usergroup {
 
     public void setUsergroupRoles(List<Role> usergroupRoles) {
         this.usergroupRoles = usergroupRoles;
+    }
+
+    public List<User> getUsergroupUsers() {
+        return usergroupUsers;
+    }
+
+    public void setUsergroupUsers(List<User> usergroupUsers) {
+        this.usergroupUsers = usergroupUsers;
     }
 }

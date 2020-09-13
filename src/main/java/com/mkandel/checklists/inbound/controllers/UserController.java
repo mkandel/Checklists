@@ -42,14 +42,12 @@ public class UserController {
 
     @GetMapping(value = Routes.USER, produces = UserDto.JSON_MIME_TYPE)
     public UserDto userById(@PathVariable int id) throws UserNotFoundException {
-        final Optional<User> optionalUser = userRepository.findById(id);
-        return processOptionalUser(optionalUser, NO_SUCH_USER_ID + id);
+        return processOptionalUser(userRepository.findById(id), NO_SUCH_USER_ID + id);
     }
 
     @GetMapping(value = Routes.USER_BY_USERNAME, produces = UserDto.JSON_MIME_TYPE)
     public UserDto userByUsername(@PathVariable String username) throws UserNotFoundException {
-        final Optional<User> optionalUser = userRepository.findByUsername(username);
-        return processOptionalUser(optionalUser, NO_SUCH_USERNAME + username);
+        return processOptionalUser(userRepository.findByUsername(username), NO_SUCH_USERNAME + username);
     }
 
     @GetMapping(value = Routes.USERNAMES, produces = UsernameDto.JSON_MIME_TYPE)

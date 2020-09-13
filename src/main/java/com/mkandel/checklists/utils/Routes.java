@@ -19,8 +19,8 @@ public class Routes {
     public static final String ROLES = BASE + "/roles";
     public static final String ROLE = BASE + "/role/{id}";
     // UserRoles
-    public static final String USER_ROLES = BASE + "/user-roles";
-    public static final String USER_ROLE = BASE + "/user-role/{id}";
+    public static final String USERGROUPS = BASE + "/usergroups";
+    public static final String USERGROUP = BASE + "/usergroup/{id}";
 
     // Testing.  TODO: Remove these eventually
     public static final String USER_BY_USERNAME = BASE + "/user-by-username/{username}";
