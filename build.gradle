@@ -7,10 +7,6 @@ plugins {
 
 group = 'com.mkandel'
 version = '0.0.1-SNAPSHOT'
-/*
- * Copyright (c) 2020. Marc Kandel
- */
-
 //sourceCompatibility = '13'
 
 configurations {
