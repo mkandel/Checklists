@@ -2,7 +2,7 @@ FROM centos:8
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
-RUN yum install -y tzdata openssl curl wget ca-certificates fontconfig gzip tar unzip \
+RUN dnf install -y tzdata openssl curl ca-certificates fontconfig gzip tar unzip \
     && yum update -y; yum clean all
 
 ENV JAVA_VERSION jdk-13.0.2+8
@@ -64,7 +64,7 @@ ENV GRADLE_VERSION 6.6.1
 ARG GRADLE_DOWNLOAD_SHA256=7873ed5287f47ca03549ab8dcb6dc877ac7f0e3d7b1eb12685161d10080910ac
 RUN set -o errexit -o nounset \
     && echo "Downloading Gradle" \
-    && wget --no-verbose --output-document=gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
+    && curl -LfsSo gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
     \
     && echo "Checking download hash" \
     && echo "${GRADLE_DOWNLOAD_SHA256} *gradle.zip" | sha256sum --check - \

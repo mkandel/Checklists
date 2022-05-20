@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LogUtil {
-    private Logger logger;
+    private final Logger logger;
 
     public LogUtil() {
         logger = LoggerFactory.getLogger(ChecklistsApplication.class);
